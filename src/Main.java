@@ -4,6 +4,7 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static int answer = 0;
     public static int turn = 1;
+    public static int penalty_trun =0;
     public static void main(String[] args) {
         System.out.println("지금부터 게임을 진행합니다.");
 
@@ -51,7 +52,12 @@ public class Main {
             } else if(baseRule(currentPlayer, answer)) {
                 break;
             }
-            turn++;
+            // 턴
+            if(penalty_trun !=0){
+                penalty_trun-=1;
+            } else {
+                turn++;
+            }
             currentPlayer = (currentPlayer.equals(player_01)) ? player_02 : player_01;
         }
     }
@@ -87,28 +93,28 @@ public class Main {
         }
     }
 
-    public static int fristHintPenalty(int measure, int turn){
+    public static int fristHintPenalty(int measure, int penalty_trun){
         if (measure<3) {
-            turn += 1;
+            penalty_trun += 1;
         }
-        turn+=3;
-        return turn;
+        penalty_trun+=3;
+        return penalty_trun;
     }
-    public static int secondHintPenalty(int turn, int answer, int inputNumber_01, int inputNumber_02, int inputNumber_03, int inputNumber_04, int inputNumber_05){
+    public static int secondHintPenalty(int penalty_trun, int answer, int inputNumber_01, int inputNumber_02, int inputNumber_03, int inputNumber_04, int inputNumber_05){
         if(answer==inputNumber_01 || answer == inputNumber_02 || answer == inputNumber_03  || answer == inputNumber_04 || answer == inputNumber_05){
-            turn +=3;
+            penalty_trun +=3;
         }
-        turn+=3;
-        return turn;
+        penalty_trun+=3;
+        return penalty_trun;
     }
-    public static int thirdHintPenalty(int turn, int answer){
+    public static int thirdHintPenalty(int penalty_trun, int answer){
         if(answer>=2000){
-            turn += 7;
+            penalty_trun += 7;
         } else{
-            turn -= 9;
+            penalty_trun -= 9;
         }
-        turn+=3;
-        return turn;
+        penalty_trun+=3;
+        return penalty_trun;
     }
 
 
