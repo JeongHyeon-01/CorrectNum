@@ -49,6 +49,16 @@ public class Main {
                 answer -= 560;
                 isMultipleHint = true;
             }
+            //추가힌트 8 과 10의 배수
+            else if (turn % 8 == 0) {
+                //자리수합
+                int sumDigit = calculateSumDigits(answer);
+                System.out.println("힌트 : 정답의 각 자리수 합은 " + sumDigit + "입니다.");
+            } else if (turn %10 ==0) {
+                // 각 정답의 자리수 힌트 제공 ex answer = 100 제공 = 3
+                int numDigit = countDigits(answer);
+                System.out.println("힌트 : 정답은 " + numDigit + " 자리 숫자 입니다.");
+            }
             if (baseRule(currentPlayer, answer)) {
                 if (isMultipleHint && wronganswer >= 2) {
                     provideHint(currentPlayer);
@@ -58,6 +68,7 @@ public class Main {
             }
             else {
                 wronganswer ++;
+                //패널티
             }
             turn++;
             currentPlayer = (currentPlayer.equals(player1)) ? player2 : player1;
@@ -138,5 +149,24 @@ public class Main {
             return true;
         }
         return false;
+    }
+    public static int calculateSumDigits(int number){
+        //자리수 합
+        int sum = 0;
+        while (number > 0){
+            int digit = number % 10;
+            sum += digit;
+            number /= 10;
+        }
+        return sum;
+    }
+    public static int countDigits(int number){
+        //자리수 계산
+        int count = 0;
+        while (number >0){
+            number /=10;
+            count ++;
+        }
+        return count;
     }
 }
