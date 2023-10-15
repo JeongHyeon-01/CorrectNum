@@ -6,6 +6,13 @@ public class Main {
     public static int answer = 0;
     public static int turn = 1;
     public static int hintCount = 0;
+    public static int wronganswer = 0;
+
+    public static int recentGuess1;
+    public static int recentGuess2;
+    public static int recentGuess3;
+    public static int recentGuess4;
+    public static int recentGuess5;
 
     public static void main(String[] args) {
         System.out.println("숫자 게임을 시작합니다.");
@@ -34,18 +41,23 @@ public class Main {
         while (true) {
             // 5, 7의 배수일 때 정답 변경
             if (turn % 5 == 0) {
+                System.out.println("오답입니다.");
                 answer += 1200;
                 isMultipleHint = true;
             } else if (turn % 7 == 0) {
+                System.out.println("오답입니다.");
                 answer -= 560;
                 isMultipleHint = true;
             }
+            if (baseRule(currentPlayer, answer)) {
+                if (isMultipleHint && wronganswer >= 2) {
+                    provideHint(currentPlayer);
+                }
+                break;
 
-            if (baseRule(currentPlayer, answer) && isMultipleHint) {
-                // 5와 7의 배수 힌트 제공
-                break;
-            } else if (baseRule(currentPlayer, answer)) {
-                break;
+            }
+            else {
+                wronganswer ++;
             }
             turn++;
             currentPlayer = (currentPlayer.equals(player1)) ? player2 : player1;
@@ -91,9 +103,10 @@ public class Main {
             System.out.println("힌트 1: " + factor + " 이상의 약수");
         } else if (hintChoice == 2) {
             System.out.println("힌트 2: 최근 5턴 동안 입력한 숫자 중 정답 여부 출력");
-            // 최근 5턴 동안 입력한 숫자 중 정답 여부 출력 로직을 추가하세요.
+            // 5개 어떻게 담지///
         }
     }
+    // 약수
     public static int findFactor(int number) {
         for (int i = 20; i <= number; i++) {
             if (number % i == 0) {
