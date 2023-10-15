@@ -7,6 +7,7 @@ public class Main {
     public static int turn = 1;
     public static int hintCount = 0;
     public static int wronganswer = 0;
+    public static int inputNumber;
 
     public static int recentGuess1;
     public static int recentGuess2;
@@ -59,14 +60,15 @@ public class Main {
                 int numDigit = countDigits(answer);
                 System.out.println("힌트 : 정답은 " + numDigit + " 자리 숫자 입니다.");
             }
-            if (baseRule(currentPlayer, answer)) {
-                if (isMultipleHint && wronganswer >= 2) {
+            inputNumber = baseRule(currentPlayer,answer);
+
+            if (inputNumber == answer){
+                if (isMultipleHint && wronganswer >= 2){
                     provideHint(currentPlayer);
                 }
                 break;
-
             }
-            else {
+            else{
                 wronganswer ++;
                 //패널티
             }
@@ -89,7 +91,7 @@ public class Main {
         return firstInput + secondInput;
     }
 
-    public static boolean baseRule(String player, int answer) {
+    public static int baseRule(String player, int answer) {
         System.out.printf("%s님이 정답을 추측하세요: ", player);
         int inputNumber = sc.nextInt();
         // 5개 저장
@@ -107,13 +109,13 @@ public class Main {
 
         if (answer < inputNumber) {
             System.out.printf("%s님이 입력하신 숫자가 정답보다 작습니다.\n", player);
-            return false;
+            return inputNumber;
         } else if (answer > inputNumber) {
             System.out.printf("%s님이 입력하신 숫자가 정답보다 큽니다.\n", player);
-            return false;
+            return inputNumber;
         } else {
             System.out.printf("정답입니다! %s님 승리!\n", player);
-            return true;
+            return inputNumber;
         }
     }
     public static void provideHint(String player) {
@@ -135,13 +137,16 @@ public class Main {
             }
         }
     }
-    // 약수
+
     public static int findFactor(int number) {
+        // 약수
         for (int i = 20; i <= number; i++) {
             if (number % i == 0) {
+                System.out.println("정답이 " + i + "의 배수 입니다.");
                 return i;
             }
         }
+        System.out.println("더이상 일치하는 배수가 없습니다.");
         return number;
     }
     public static boolean isAnswerFoundInRecentGuesses(){
