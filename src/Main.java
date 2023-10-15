@@ -183,14 +183,15 @@ public class Main {
 
     public static int findFactor(int number) {
         // 약수
+        int count = 0;
         for (int i = 20; i <= number; i++) {
             if (number % i == 0) {
                 System.out.println("정답이 " + i + "의 배수 입니다.");
-                return i;
+                count++;
             }
         }
         System.out.println("더이상 일치하는 배수가 없습니다.");
-        return number;
+        return count;
     }
     public static boolean isAnswerFoundInRecentGuesses(){
         if (recentGuess1 == answer || recentGuess2 ==answer || recentGuess3 ==answer || recentGuess4 ==answer || recentGuess5 ==answer){
