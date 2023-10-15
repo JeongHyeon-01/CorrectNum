@@ -101,8 +101,8 @@ public class Main {
         return penalty_trun;
     }
     // 힌트 2번에 대한 패널티
-    public static int secondHintPenalty(int penalty_trun, int answer, int inputNumber_01, int inputNumber_02, int inputNumber_03, int inputNumber_04, int inputNumber_05){
-        if(answer==inputNumber_01 || answer == inputNumber_02 || answer == inputNumber_03  || answer == inputNumber_04 || answer == inputNumber_05){
+    public static int secondHintPenalty(int penalty_trun, int answer, int recentGuess1, int recentGuess2, int recentGuess3, int recentGuess4, int recentGuess5){
+        if(answer==recentGuess1 || answer == recentGuess2 || answer == recentGuess3  || answer == recentGuess4 || answer == recentGuess5){
             penalty_trun +=3;
         }
         penalty_trun+=3;
@@ -110,8 +110,8 @@ public class Main {
     }
 
     // 힌트 3번에 대한 패널티
-    public static int thirdHintPenalty(int penalty_trun, int answer){
-        if(answer>=2000){
+    public static int thirdHintPenalty(int penalty_trun, int isAnswerFound){
+        if(isAnswerFound>=2000){
             penalty_trun += 7;
         } else{
             penalty_trun -= 9;
