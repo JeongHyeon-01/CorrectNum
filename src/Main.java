@@ -5,6 +5,8 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static int answer = 0;
     public static int turn = 1;
+    public static int penalty_trun =0;
+
     public static int hintCount = 0;
     public static int wronganswer = 0;
     public static int inputNumber;
@@ -55,31 +57,39 @@ public class Main {
                 //자리수합
                 int sumDigit = calculateSumDigits(answer);
                 System.out.println("힌트 : 정답의 각 자리수 합은 " + sumDigit + "입니다.");
-            } else if (turn %10 ==0) {
+            } else if (turn % 10 == 0) {
                 // 각 정답의 자리수 힌트 제공 ex answer = 100 제공 = 3
                 int numDigit = countDigits(answer);
                 System.out.println("힌트 : 정답은 " + numDigit + " 자리 숫자 입니다.");
             }
-            inputNumber = baseRule(currentPlayer,answer);
+            inputNumber = baseRule(currentPlayer, answer);
 
-            if (inputNumber == answer){
-                if (isMultipleHint && wronganswer >= 2){
+            if (inputNumber == answer) {
+                if (isMultipleHint && wronganswer >= 2) {
                     provideHint(currentPlayer);
                 }
                 break;
             }
-            else{
-                wronganswer ++;
-                //패널티
+
+            // 패널티가 있을땐
+            if (penalty_trun != 0) {
+
+                penalty_trun -= 1;
             }
-            turn++;
-            currentPlayer = (currentPlayer.equals(player1)) ? player2 : player1;
+            else{
+                wronganswer++;
+                //패널티
+                }
+                turn++;
+                currentPlayer = (currentPlayer.equals(player1)) ? player2 : player1;
+            }
         }
-    }
+
 
     public static String InputName(String order) {
         System.out.print(order + " 플레이어의 이름을 입력하세요: ");
         String playerName = sc.next();
+
         return playerName;
     }
 
@@ -137,6 +147,39 @@ public class Main {
             }
         }
     }
+    // 패널티 턴이 존재하면 힌트 제공 X
+    // 힌트 1번에 대한 패널티 약수 개수로 판별,
+    public static int fristHintPenalty(int measure, int penalty_trun){
+        if (measure<3) {
+            penalty_trun += 1;
+        }
+        penalty_trun+=3;
+        return penalty_trun;
+    }
+    // 힌트 2번에 대한 패널티
+    public static int secondHintPenalty(int penalty_trun, int answer, int recentGuess1, int recentGuess2, int recentGuess3, int recentGuess4, int recentGuess5){
+        if(answer==recentGuess1 || answer == recentGuess2 || answer == recentGuess3  || answer == recentGuess4 || answer == recentGuess5){
+            penalty_trun +=3;
+        }
+        penalty_trun+=3;
+        return penalty_trun;
+    }
+
+    // 힌트 3번에 대한 패널티
+    public static int thirdHintPenalty(int penalty_trun, int answer){
+        if(answer>=2000){
+            penalty_trun += 7;
+        } else{
+            penalty_trun -= 9;
+
+            if(penalty_trun<0){
+                penalty_trun=0;
+            }
+        }
+        penalty_trun+=3;
+        return penalty_trun;
+    }
+
 
     public static int findFactor(int number) {
         // 약수
