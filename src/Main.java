@@ -43,21 +43,21 @@ public class Main {
 
         while (true) {
             // 5, 7의 배수일 때 정답 변경
-            if (turn % 5 == 0) {
+            if (turn % 5 == 0 && penalty_trun==0) {
                 System.out.println("오답입니다.");
                 answer += 1200;
                 isMultipleHint = true;
-            } else if (turn % 7 == 0) {
+            } else if (turn % 7 == 0 && penalty_trun==0) {
                 System.out.println("오답입니다.");
                 answer -= 560;
                 isMultipleHint = true;
             }
             //추가힌트 8 과 10의 배수
-            else if (turn % 8 == 0) {
+            else if (turn % 8 == 0 && penalty_trun==0) {
                 //자리수합
                 int sumDigit = calculateSumDigits(answer);
                 System.out.println("힌트 : 정답의 각 자리수 합은 " + sumDigit + "입니다.");
-            } else if (turn % 10 == 0) {
+            } else if (turn % 10 == 0 && penalty_trun==0) {
                 // 각 정답의 자리수 힌트 제공 ex answer = 100 제공 = 3
                 int numDigit = countDigits(answer);
                 System.out.println("힌트 : 정답은 " + numDigit + " 자리 숫자 입니다.");
@@ -73,15 +73,10 @@ public class Main {
 
             // 패널티가 있을땐
             if (penalty_trun != 0) {
-
                 penalty_trun -= 1;
             }
-            else{
-                wronganswer++;
-                //패널티
-                }
-                turn++;
-                currentPlayer = (currentPlayer.equals(player1)) ? player2 : player1;
+            turn++;
+            currentPlayer = (currentPlayer.equals(player1)) ? player2 : player1;
             }
         }
 
