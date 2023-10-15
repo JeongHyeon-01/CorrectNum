@@ -91,8 +91,8 @@ public class Main {
             return true;
         }
     }
-
-    // 힌트 1번에 대한 패널티 약수 개수로 판별
+    // 패널티 턴이 존재하면 힌트 제공 X
+    // 힌트 1번에 대한 패널티 약수 개수로 판별,
     public static int fristHintPenalty(int measure, int penalty_trun){
         if (measure<3) {
             penalty_trun += 1;
