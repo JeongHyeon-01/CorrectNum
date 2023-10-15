@@ -52,12 +52,11 @@ public class Main {
             } else if(baseRule(currentPlayer, answer)) {
                 break;
             }
-            // 턴
+            // 패널티가 있을땐
             if(penalty_trun !=0){
                 penalty_trun-=1;
-            } else {
-                turn++;
             }
+            turn++;
             currentPlayer = (currentPlayer.equals(player_01)) ? player_02 : player_01;
         }
     }
@@ -112,6 +111,10 @@ public class Main {
             penalty_trun += 7;
         } else{
             penalty_trun -= 9;
+
+            if(penalty_trun<0){
+                penalty_trun=0;
+            }
         }
         penalty_trun+=3;
         return penalty_trun;
