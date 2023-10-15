@@ -131,10 +131,12 @@ public class Main {
 
         if (hintChoice == 1) {
             int factor = findFactor(answer);
+            penalty_trun = fristHintPenalty(factor, penalty_trun);
             System.out.println("힌트 1: " + factor + " 이상의 약수");
         } else if (hintChoice == 2) {
             System.out.println("힌트 2: 최근 5턴 동안 입력한 숫자 중 정답 여부 출력");
             boolean isAnswerFound = isAnswerFoundInRecentGuesses();
+            penalty_trun = secondHintPenalty(penalty_trun, isAnswerFound);
             if (isAnswerFound){
                 System.out.println("이전 최근 5턴 중에서 정답이 존재합니다");
             }else {
@@ -152,8 +154,8 @@ public class Main {
         return penalty_trun;
     }
     // 힌트 2번에 대한 패널티
-    public static int secondHintPenalty(int penalty_trun, int answer, int recentGuess1, int recentGuess2, int recentGuess3, int recentGuess4, int recentGuess5){
-        if(answer==recentGuess1 || answer == recentGuess2 || answer == recentGuess3  || answer == recentGuess4 || answer == recentGuess5){
+    public static int secondHintPenalty(int penalty_trun, boolean isAnswerFound){
+        if(isAnswerFound){
             penalty_trun +=3;
         }
         penalty_trun+=3;
