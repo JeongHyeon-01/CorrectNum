@@ -87,4 +87,29 @@ public class Main {
         }
     }
 
+    public static int fristHintPenalty(int measure, int turn){
+        if (measure<3) {
+            turn += 1;
+        }
+        turn+=3;
+        return turn;
+    }
+    public static int secondHintPenalty(int turn, int answer, int inputNumber_01, int inputNumber_02, int inputNumber_03, int inputNumber_04, int inputNumber_05){
+        if(answer==inputNumber_01 || answer == inputNumber_02 || answer == inputNumber_03  || answer == inputNumber_04 || answer == inputNumber_05){
+            turn +=3;
+        }
+        turn+=3;
+        return turn;
+    }
+    public static int thirdHintPenalty(int turn, int answer){
+        if(answer>=2000){
+            turn += 7;
+        } else{
+            turn -= 9;
+        }
+        turn+=3;
+        return turn;
+    }
+
+
 }
