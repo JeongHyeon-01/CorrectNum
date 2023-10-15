@@ -81,6 +81,19 @@ public class Main {
     public static boolean baseRule(String player, int answer) {
         System.out.printf("%s님이 정답을 추측하세요: ", player);
         int inputNumber = sc.nextInt();
+        // 5개 저장
+        if (turn % 5 ==1){
+            recentGuess1 = inputNumber;
+        } else if (turn % 5 ==2) {
+            recentGuess2 = inputNumber;
+        } else if (turn % 5 ==3) {
+            recentGuess3 = inputNumber;
+        } else if (turn % 5 ==4){
+            recentGuess4 = inputNumber;
+        } else if (turn % 5 == 0) {
+            recentGuess5 = inputNumber;
+        }
+
         if (answer < inputNumber) {
             System.out.printf("%s님이 입력하신 숫자가 정답보다 작습니다.\n", player);
             return false;
@@ -103,7 +116,12 @@ public class Main {
             System.out.println("힌트 1: " + factor + " 이상의 약수");
         } else if (hintChoice == 2) {
             System.out.println("힌트 2: 최근 5턴 동안 입력한 숫자 중 정답 여부 출력");
-            // 5개 어떻게 담지///
+            boolean isAnswerFound = isAnswerFoundInRecentGuesses();
+            if (isAnswerFound){
+                System.out.println("이전 최근 5턴 중에서 정답이 존재합니다");
+            }else {
+                System.out.println("이전 최근 5턴 중에서 정답이 존재하지 않습니다.");
+            }
         }
     }
     // 약수
@@ -114,5 +132,11 @@ public class Main {
             }
         }
         return number;
+    }
+    public static boolean isAnswerFoundInRecentGuesses(){
+        if (recentGuess1 == answer || recentGuess2 ==answer || recentGuess3 ==answer || recentGuess4 ==answer || recentGuess5 ==answer){
+            return true;
+        }
+        return false;
     }
 }
