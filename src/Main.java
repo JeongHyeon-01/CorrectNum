@@ -110,8 +110,8 @@ public class Main {
     }
 
     // 힌트 3번에 대한 패널티
-    public static int thirdHintPenalty(int penalty_trun, int isAnswerFound){
-        if(isAnswerFound>=2000){
+    public static int thirdHintPenalty(int penalty_trun, int answer){
+        if(answer>=2000){
             penalty_trun += 7;
         } else{
             penalty_trun -= 9;
