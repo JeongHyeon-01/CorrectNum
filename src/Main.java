@@ -92,6 +92,7 @@ public class Main {
         }
     }
 
+    // 힌트 1번에 대한 패널티 약수 개수로 판별
     public static int fristHintPenalty(int measure, int penalty_trun){
         if (measure<3) {
             penalty_trun += 1;
@@ -99,6 +100,7 @@ public class Main {
         penalty_trun+=3;
         return penalty_trun;
     }
+    // 힌트 2번에 대한 패널티
     public static int secondHintPenalty(int penalty_trun, int answer, int inputNumber_01, int inputNumber_02, int inputNumber_03, int inputNumber_04, int inputNumber_05){
         if(answer==inputNumber_01 || answer == inputNumber_02 || answer == inputNumber_03  || answer == inputNumber_04 || answer == inputNumber_05){
             penalty_trun +=3;
@@ -106,6 +108,8 @@ public class Main {
         penalty_trun+=3;
         return penalty_trun;
     }
+
+    // 힌트 3번에 대한 패널티
     public static int thirdHintPenalty(int penalty_trun, int answer){
         if(answer>=2000){
             penalty_trun += 7;
